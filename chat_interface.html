@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Multi-lingual AI Chat Interface</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+            "accent-orange": "#FF9933", // Saffron inspired accent
+            "accent-green": "#138808",  // Green inspired accent
+          },
+          fontFamily: {
+            "display": ["Manrope", "Noto Sans", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "2xl": "1.5rem",
+            "full": "9999px"
+          },
+          backgroundImage: {
+            'indian-pattern': "url('data:image/svg+xml,%3Csvg width=\\'60\\' height=\\'60\\' viewBox=\\'0 0 60 60\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%239C92AC\\' fill-opacity=\\'0.08\\'%3E%3Cpath d=\\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')",
+          }
+        },
+      },
+    }
+  </script>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden">
+  <div class="flex h-screen w-full">
+    <!-- Sidebar -->
+    <aside
+      class="flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#15202b] h-full transition-all duration-300">
+      <!-- Header / New Chat -->
+      <div class="p-4 flex flex-col gap-4">
+        <div class="flex items-center gap-3 px-2">
+          <div class="bg-primary/10 text-primary p-2 rounded-lg">
+            <span class="material-symbols-outlined text-2xl">auto_awesome</span>
+          </div>
+          <div class="flex flex-col">
+            <h1 class="text-base font-bold leading-tight">Namaste AI</h1>
+            <span class="text-xs text-slate-500 font-medium">Enterprise Edition</span>
+          </div>
+        </div>
+        <button
+          class="flex w-full items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 text-white py-3 px-4 font-bold shadow-sm transition-colors group">
+          <span class="material-symbols-outlined text-[20px] transition-transform group-hover:rotate-90">add</span>
+          <span>New Chat</span>
+        </button>
+      </div>
+      <!-- Scrollable Chat History -->
+      <div
+        class="flex-1 overflow-y-auto px-3 py-2 space-y-6 scrollbar-thin scrollbar-thumb-slate-200 dark:scrollbar-thumb-slate-700">
+        <!-- Today -->
+        <div class="flex flex-col gap-1">
+          <h3 class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Today</h3>
+          <button
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 transition-colors">
+            <span class="material-symbols-outlined text-[20px] text-primary">chat_bubble</span>
+            <span class="text-sm font-medium truncate">Recipe for Paneer Butter...</span>
+          </button>
+          <button
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors group">
+            <span class="material-symbols-outlined text-[20px] group-hover:text-slate-600">translate</span>
+            <span class="text-sm font-medium truncate">Translate Legal Doc to...</span>
+          </button>
+        </div>
+        <!-- Yesterday -->
+        <div class="flex flex-col gap-1">
+          <h3 class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Yesterday</h3>
+          <button
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors group">
+            <span class="material-symbols-outlined text-[20px] group-hover:text-slate-600">history</span>
+            <span class="text-sm font-medium truncate">Cricket match summary</span>
+          </button>
+          <button
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors group">
+            <span class="material-symbols-outlined text-[20px] group-hover:text-slate-600">code</span>
+            <span class="text-sm font-medium truncate">React component debug</span>
+          </button>
+        </div>
+        <!-- Previous 7 Days -->
+        <div class="flex flex-col gap-1">
+          <h3 class="px-3 text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Previous 7 Days</h3>
+          <button
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 transition-colors group">
+            <span class="material-symbols-outlined text-[20px] group-hover:text-slate-600">flight</span>
+            <span class="text-sm font-medium truncate">Bangalore trip itinerary</span>
+          </button>
+        </div>
+      </div>
+      <!-- User Profile / Settings -->
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50">
+        <button
+          class="flex items-center gap-3 w-full p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-left group">
+          <img alt="User Avatar" class="size-9 rounded-full object-cover ring-2 ring-white dark:ring-slate-700"
+            data-alt="Portrait of a smiling man with glasses"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAizpdX6UjyHN6zxzIusYN3YM-YWRXDtJwVw6VUDvTCojt27RtBE_7le-475-vxJr0p0gHUvpfAeYLwxDCLsbhvHzEQ994LmClCWwU4uqIJqRJX5Uym6JUui-gGGVNu5PPS8gF-bsZ5yU2wbWzYWGZaBVtlqdA0VvaLQjWva8aD-wECdDrS8OXNdq47XgloMYWEt0deU4lCGImyxKvs_NOTSHm7lUb3qUw6D9HqIfdny12s6t8G1w1vLnEgPCHpMgJ8IBsRiYYRpck" />
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-slate-900 dark:text-white truncate">Aditya Kumar</p>
+            <p class="text-xs text-slate-500 truncate">Pro Plan Active</p>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 group-hover:text-slate-600">settings</span>
+        </button>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full bg-background-light dark:bg-background-dark relative">
+      <!-- Subtle Indian Pattern Background -->
+      <div class="absolute inset-0 bg-indian-pattern opacity-60 pointer-events-none z-0"></div>
+      <!-- Header -->
+      <header
+        class="relative z-10 flex items-center justify-between px-6 py-3 bg-white/80 dark:bg-[#101922]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 sticky top-0">
+        <div class="flex items-center gap-2 lg:hidden">
+          <button class="p-2 -ml-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+        <!-- Model Selector -->
+        <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+          <button
+            class="px-3 py-1.5 bg-white dark:bg-slate-700 rounded shadow-sm text-sm font-bold text-slate-800 dark:text-slate-100 transition-all">GPT-4o</button>
+          <button
+            class="px-3 py-1.5 text-sm font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">Namaste-Pro</button>
+        </div>
+        <div class="flex items-center gap-3">
+          <!-- Language Toggle -->
+          <div
+            class="hidden sm:flex items-center bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg p-1 shadow-sm">
+            <button class="px-3 py-1 rounded text-xs font-bold bg-primary/10 text-primary">English</button>
+            <button
+              class="px-3 py-1 rounded text-xs font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">Hindi</button>
+            <button
+              class="px-3 py-1 rounded text-xs font-medium text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-800 dark:hover:text-slate-200 transition-colors">Hinglish</button>
+            <div class="w-px h-4 bg-slate-200 mx-1"></div>
+            <button class="px-2 py-1 rounded text-slate-400 hover:text-primary transition-colors"
+              title="More Languages">
+              <span class="material-symbols-outlined text-[18px]">expand_more</span>
+            </button>
+          </div>
+          <!-- Mobile language icon -->
+          <button class="sm:hidden p-2 rounded-lg bg-white border border-slate-200 text-primary">
+            <span class="material-symbols-outlined">translate</span>
+          </button>
+        </div>
+      </header>
+      <!-- Chat Area (Scrollable) -->
+      <div class="relative z-10 flex-1 overflow-y-auto p-4 sm:p-8 scroll-smooth" id="chat-container">
+        <div class="max-w-3xl mx-auto flex flex-col h-full justify-center pb-20">
+          <!-- Welcome / Empty State -->
+          <div class="flex flex-col items-center justify-center text-center space-y-8 animate-fade-in-up">
+            <div class="relative">
+              <div
+                class="absolute -inset-4 bg-gradient-to-r from-accent-orange/20 to-accent-green/20 blur-xl rounded-full opacity-50">
+              </div>
+              <img alt="AI Logo" class="relative size-20 rounded-2xl object-cover shadow-lg mb-2"
+                data-alt="Abstract colorful mandala pattern"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0PjLuaOvOlZZK-WbW6iBdvpuK-ZmMALqwjfMdIaP1n8I_midiuos6JGwz95QHJ2ht1yFp7VjyNb1MXvQdhWFCotLCtV-Z2z0rrc4f9Qx6Nz685ifwRiyTMFXnuMiyCBvp7b4URo1b3YrCmEHPOu2CMkZne5gNK4Nn6VGf6A-iMIy3oaXWYZx5mRSARF6LeNLecE_THyCZBFGsR8ZM-Ba4SaESZoc-dg8t00Lgeyzqr8hVUUdy8HGF0m3WgdPtjJuGYUK8djUBMRI" />
+            </div>
+            <div class="space-y-2 max-w-lg">
+              <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Namaste, Aditya! 🙏</h2>
+              <p class="text-slate-500 dark:text-slate-400 text-lg">I'm your multi-lingual assistant. How can I help you
+                today?</p>
+            </div>
+            <!-- Quick Prompts Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl mt-8">
+              <!-- Card 1 -->
+              <button onclick="window.location.href='draft_letter.html'"
+                class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:bg-white hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 transition-all text-left group">
+                <div
+                  class="bg-blue-50 dark:bg-blue-900/30 p-2.5 rounded-lg text-primary group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined">edit_document</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm">Draft a formal letter</h3>
+                  <p class="text-xs text-slate-500 mt-1 line-clamp-2">Write a leave application for a wedding in the
+                    family.</p>
+                </div>
+              </button>
+              <!-- Card 2 -->
+              <button onclick="window.location.href='translate.html'"
+                class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:bg-white hover:border-accent-green/30 hover:shadow-md hover:shadow-accent-green/5 transition-all text-left group">
+                <div
+                  class="bg-green-50 dark:bg-green-900/30 p-2.5 rounded-lg text-accent-green group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined">translate</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm">Translate to Marathi</h3>
+                  <p class="text-xs text-slate-500 mt-1 line-clamp-2">Translate "Can we reschedule the meeting to 4 PM?"
+                  </p>
+                </div>
+              </button>
+              <!-- Card 3 -->
+              <button onclick="window.location.href='news.html'"
+                class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:bg-white hover:border-accent-orange/30 hover:shadow-md hover:shadow-accent-orange/5 transition-all text-left group">
+                <div
+                  class="bg-orange-50 dark:bg-orange-900/30 p-2.5 rounded-lg text-accent-orange group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined">newspaper</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm">Local News Summary</h3>
+                  <p class="text-xs text-slate-500 mt-1 line-clamp-2">Summarize today's top headlines from The Hindu.
+                  </p>
+                </div>
+              </button>
+              <!-- Card 4 -->
+              <button onclick="window.location.href='recipe.html'"
+                class="flex items-start gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:bg-white hover:border-purple-400/30 hover:shadow-md hover:shadow-purple-500/5 transition-all text-left group">
+                <div
+                  class="bg-purple-50 dark:bg-purple-900/30 p-2.5 rounded-lg text-purple-600 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined">restaurant_menu</span>
+                </div>
+                <div>
+                  <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm">Find a Recipe</h3>
+                  <p class="text-xs text-slate-500 mt-1 line-clamp-2">How do I make authentic Hyderabadi Biryani?</p>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer / Input Area -->
+      <div
+        class="relative z-20 p-4 sm:p-6 bg-gradient-to-t from-background-light via-background-light to-transparent dark:from-background-dark dark:via-background-dark">
+        <div class="max-w-3xl mx-auto">
+          <!-- Input Box -->
+          <div
+            class="relative flex items-end gap-2 bg-white dark:bg-[#1e2936] border border-slate-200 dark:border-slate-700 shadow-lg rounded-2xl p-2 focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary transition-all">
+            <button
+              class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 flex-shrink-0 self-end mb-0.5">
+              <span class="material-symbols-outlined">add_circle</span>
+            </button>
+            <textarea
+              class="w-full bg-transparent border-none text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:ring-0 resize-none py-3 max-h-48 overflow-y-auto leading-relaxed"
+              placeholder="Type a message or use voice..." rows="1" style="min-height: 48px;"></textarea>
+            <div class="flex items-center gap-1 self-end mb-0.5">
+              <!-- Voice Input Button (Pulse Effect) -->
+              <button
+                class="relative group p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors flex-shrink-0"
+                title="Voice Input">
+                <span class="material-symbols-outlined text-slate-500 group-hover:text-primary">mic</span>
+                <!-- Active Indicator (Hidden by default, imagine toggled on active state) -->
+                <!-- <span class="absolute top-0 right-0 flex h-3 w-3">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                                </span> -->
+              </button>
+              <!-- Send Button -->
+              <button
+                class="p-2 bg-primary hover:bg-blue-600 text-white rounded-xl shadow-md transition-all hover:scale-105 flex-shrink-0">
+                <span class="material-symbols-outlined text-[20px]">arrow_upward</span>
+              </button>
+            </div>
+          </div>
+          <p class="text-center text-xs text-slate-400 mt-3">
+            Namaste AI can make mistakes. Consider checking important information.
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <style>
+    /* Custom Scrollbar for better aesthetics */
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 20px;
+    }
+
+    .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+      background-color: #334155;
+    }
+
+    /* Simple Fade In Animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+</body>
+
+</html>
